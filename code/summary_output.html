@@ -1,0 +1,65 @@
+<!-- sentiment_results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        p {
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Comment</th>
+                <th>Predicted Label</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.comment }}</td>
+                <td>{{ comment.predicted_label }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Summary Output</h1>
+    <p>{{ summary_text }}</p>
+</body>
+</html>

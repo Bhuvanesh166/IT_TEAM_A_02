@@ -1,0 +1,197 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your existing head content -->
+    <script>
+        var commentsList = [];
+
+        function showReviewForm() {
+            document.getElementById('reviewForm').style.display = 'block';
+        }
+
+        function addReview() {
+            var userName = document.getElementById('userName').value;
+            var userReview = document.getElementById('userReview').value;
+
+            var newReview = document.createElement('div');
+            newReview.innerHTML = '<hr><h4>' + userName + '</h4><p class="review-text">' + userReview + '</p>';
+
+            var userReviews = document.getElementById('userReviews');
+            userReviews.appendChild(newReview);
+
+            var comment = { userName: userName, userReview: userReview };
+            commentsList.push(comment);
+
+            // Send comment to server for storage
+            fetch('/store_comment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(comment),
+            });
+
+            document.getElementById('userName').value = '';
+            document.getElementById('userReview').value = '';
+            document.getElementById('reviewForm').style.display = 'none';
+        }
+    </script>
+    <style>
+        /* Your existing styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Background color */
+            color: #333; /* Text color */
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50; /* Navbar background color */
+            color: #fff; /* Navbar text color */
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333; /* Navbar background color */
+            padding: 10px;
+        }
+        nav a {
+            color: #fff; /* Navbar text color */
+            text-decoration: none;
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff; /* Section background color */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Section box shadow */
+        }
+        h2 {
+            color: #333;
+        }
+        .product-description {
+            margin-bottom: 20px;
+            padding-left: 50px;
+        }
+        .product-image {
+            text-align: center;
+            margin-bottom: 90px;
+        }
+        .product-image img {
+            max-width: 100%;
+            max-height: 300px; /* Set a maximum height for the image */
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .reviews {
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .review {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .footer {
+            background-color: #333; /* Footer background color */
+            color: #fff; /* Footer text color */
+            text-align: center;
+            padding: 10px;
+           
+            bottom: 0;
+            height: 7%;
+            width: 100%;
+        }
+        .rv1{
+            padding-left: 46%;
+        }
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <!-- Your existing body content -->
+    <header>
+        <h1>My E-Commerce Website</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Product</a>
+        <a href="#">Cart</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <section class="product-description">
+        <h2>Samsung Galaxy Ultra</h2>
+        <div class="product-image">
+            <img src="s22.jpg" alt="Product Image">
+        </div>
+        <div class="rv1">
+            <h3>RAM: 12GB</h3>
+            <h3>Processor: Exynos i50</h3>
+            <h3>Price: $91,000</h3>
+        </div>
+    </section>
+
+    <section class="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review" id="userReviews">
+           <!-- Existing reviews go here -->
+        </div>
+
+        <!-- Add a button to trigger the review input form -->
+        <button onclick="showReviewForm()">Add Review</button>
+
+        <!-- Add a form for users to submit reviews (initially hidden) -->
+        <form id="reviewForm" style="display: none;">
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" required>
+            <label for="userReview">Your Review:</label>
+            <textarea id="userReview" rows="4" required></textarea>
+            <button type="button" onclick="addReview()">Submit Review</button>
+        </form>
+    </section>
+
+    <div class="footer">
+        <p>&copy; 2023 My E-Commerce Website</p>
+        <p>Contact: easyshop@gmail.com</p>
+        <p>Ads: Advertisements Here</p>
+    </div>
+</body>
+</html>
+<!-- index.html -->
